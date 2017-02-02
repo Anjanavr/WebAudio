@@ -6,6 +6,7 @@ footer {
   text-align: center;
 }
 header {
+  background-image: url("../images/bg-body.jpg");
   background-color: #fff;
   color: #356618;
   text-align: center;
@@ -26,8 +27,7 @@ body {
   margin: 0;
 }
 .outerWrapper {
-  background-image: url("../images/bg-body.jpg")
-  background-color: #4B4B4B;
+  background-color: #fefefe;
   height: 72vh;
   padding: 20px;
   text-align: center;
@@ -41,5 +41,18 @@ a {
   cursor: pointer;
   display: inline-block;
   min-width: 85px;
+  position: relative;
   text-align: left;
 }
+
+/*a:after {
+  background-image: url("../images/play_icon.png");
+  background-repeat: no-repeat;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  position: absolute;
+  right: 0
+  top: 0;
+  width: 10px;
+}*/

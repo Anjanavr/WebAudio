@@ -46,7 +46,6 @@ function loadTrack(track) {
 }
 
 function playSound(track, time) {
-  console.log(track.audio.duration, time);
   var source = context.createBufferSource(); // create source
   source.buffer = track.audio; // sets the decoded audio buffer as source node
   source.connect(context.destination);
