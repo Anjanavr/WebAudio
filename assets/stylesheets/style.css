@@ -39,4 +39,7 @@ section {
 }
 a {
   cursor: pointer;
+  display: inline-block;
+  min-width: 85px;
+  text-align: left;
 }

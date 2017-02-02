@@ -10,7 +10,11 @@ function init() {
     'animals004.mp3',
     'animals005.mp3',
     'animals006.mp3',
-    'animals007.mp3'
+    'animals007.mp3',
+    'bass.wav',
+    'guitar.wav',
+    'piano.wav',
+    'bell.wav'
   ];
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -42,13 +46,14 @@ function loadTrack(track) {
 }
 
 function playSound(track, time) {
-  console.log(track.name, time);
+  console.log(track.audio.duration, time);
   var source = context.createBufferSource(); // create source
   source.buffer = track.audio; // sets the decoded audio buffer as source node
   source.connect(context.destination);
   if (time === undefined ) {
     time = 0;
   }
+  // If time represents a time in the past the play will start immediately
   source.start(time);
 }
 
@@ -65,7 +70,8 @@ function playSoundsList(playBtn) {
   });
   for(var i = 0; i < playList.length; i++) {
     if(i === 0) {
-      playList[0].startTime = 0;
+      // currentTime - returns a double representing an ever-increasing hardware timestamp in seconds
+      playList[0].startTime = context.currentTime;
       if (playList.length > 1) {
         playList[1].startTime = playList[0].startTime + playList[0].audio.duration;
       }
@@ -81,8 +87,8 @@ function playSoundsList(playBtn) {
 }
 
 function playThisTrack(track, time) {
-  let bufferSound = bufferLoader.filter(function(obj) {
+  let bufferSound = bufferLoader.find(function(obj) {
     return obj.name === track;
   });
-  playSound(bufferSound[0], time);
+  playSound(bufferSound, time);
 }
