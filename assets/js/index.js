@@ -42,6 +42,7 @@ function loadTrack(track) {
 }
 
 function playSound(track, time) {
+  console.log(track.name, time);
   var source = context.createBufferSource(); // create source
   source.buffer = track.audio; // sets the decoded audio buffer as source node
   source.connect(context.destination);
@@ -53,10 +54,8 @@ function playSound(track, time) {
 
 function playSoundsList(playBtn) {
   // Gets the file names and convert it into array using $.map 
-  playList = $.map($($(playBtn).parent()).find('input[type="checkbox"]:checked').map(function(x, obj) {
-      return obj.nextElementSibling.innerText;
-    }), function(key, value) {
-      return [key];
+  playList = $.map($($(playBtn).parent()).find('input[type="checkbox"]:checked'), function(key, value) {
+      return [key.nextElementSibling.innerText];
   });
   // Get the corresponding audio buffer objects for playing
   playList = bufferLoader.filter(function(bufferObj) {
@@ -64,13 +63,20 @@ function playSoundsList(playBtn) {
       return fileName === bufferObj.name;
     });
   });
-  for(var i=0; i<playList.length - 1; i++) {
+  for(var i = 0; i < playList.length; i++) {
     if(i === 0) {
-      playList[0].startTime = 0
+      playList[0].startTime = 0;
+      if (playList.length > 1) {
+        playList[1].startTime = playList[0].startTime + playList[0].audio.duration;
+      }
+    } else if(i !==0 && i < playList.length - 1) {
+      playList[i + 1].startTime = playList[i].startTime + playList[i].audio.duration;
     }
-    playSound(playList[i], playList[i].startTime);
     // sets the startTime
-    playList[i + 1].startTime = playList[i].startTime + playList[i].audio.duration;
+    playSound(playList[i], playList[i].startTime);
+    if (i === playList.length -1) {
+
+    }
   }
 }
 
