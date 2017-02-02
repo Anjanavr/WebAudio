@@ -1,4 +1,42 @@
+header,
+footer {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  padding: 0 .5em 0 .5em;
+  text-align: center;
+}
+header {
+  background-color: #fff;
+  color: #356618;
+  text-align: center;
+}
+header h2 {
+  margin: 0;
+  padding: 0.8em;
+}
+footer {
+  background-color: #4B4B4B;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em; 
+  text-align: center;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.outerWrapper {
+  background-image: url("../images/bg-body.jpg")
+  background-color: #4B4B4B;
+  height: 72vh;
+  padding: 20px;
+  text-align: center;
+}
 section {
   display: inline-block;
   vertical-align: middle;
+  width: 49%;
+}
+a {
+  cursor: pointer;
 }
