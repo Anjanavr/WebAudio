@@ -48,7 +48,18 @@ function loadTrack(track) {
 function playSound(track, time) {
   var source = context.createBufferSource(); // create source
   source.buffer = track.audio; // sets the decoded audio buffer as source node
-  source.connect(context.destination);
+
+  // Filter
+    var filter = context.createBiquadFilter();
+    // Create the audio graph.
+    source.connect(filter);
+    filter.connect(context.destination);
+    // Create and specify parameters for the low-pass filter.
+    filter.type = 'lowpass'; // Low-pass filter. See BiquadFilterNode docs
+    filter.frequency.value = 440; 
+  //Filter Ends
+
+  // source.connect(context.destination);
   if (time === undefined ) {
     time = 0;
   }
